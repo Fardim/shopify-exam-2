@@ -1,0 +1,46 @@
+{% assign menu_item = section.settings.main_menu %}
+
+<ul class="our-main-menu" role="menubar">
+  {% for item in menu_item.links %}
+    <li class="single-menu-item" role="menuitem">
+      <a href="{{ item.url }}">{{ item.title }}</a>
+      {% if item.links != blank and item.title != 'Mega Menu' %}
+        <ul class="our-dropdown-menu">
+          {% for child_links in item.links %}
+            <li class="single-dropdown-menu">
+              <a href="{{ child_links.url }}">{{ child_links.title }}</a>
+              {% if child_links.links != blank %}
+                <ul class="third-level-menu">
+                  {% for third_level_link in child_links.links %}
+                    <li class="single-third-level-menu">
+                      <a href="{{ third_level_link.url }}"> {{ third_level_link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if item.links != blank and item.title == 'Mega Menu' %}
+        <div class="mega-menu" aria-hidden="true" role="menu">
+          {% for second_item in item.links %}
+            <div class="nav-column">
+              <h3>{{ second_item.title }}</h3>
+              {% if second_item.links != blank %}
+                <ul>
+                  {% for third_item in second_item.links %}
+                    <li role="menuitem">
+                      <a href="{{ third_item.url }}">{{ third_item.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

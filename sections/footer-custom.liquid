@@ -1,0 +1,145 @@
+<div class="footer-custom">
+  <div class="our-container">
+    <div class="footer-columns-custom">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'text' %}
+            <div class="footer-text-column">
+              <h4>{{ block.settings.text_heading }}</h4>
+              <p>{{ block.settings.text_paragraph }}</p>
+            </div>
+
+          {% when 'menu' %}
+            <div class="footer-menu-custom">
+              <h4>{{ block.settings.footer_link_list_heading }}</h4>
+              <ul class="f-custom-menu">
+                {% for item in block.settings.footer_link_list.links %}
+                  <li>
+                    <a href="{{ item.url }}"> {{ item.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+          {% when 'newsletter' %}
+            <div class="footer-newsletter-custom">
+              <h4>{{ block.settings.newsletter_heading }}</h4>
+              <p>{{ block.settings.newsletter_text }}</p>
+              {% form 'customer' %}
+                <input type="email" name="contact[email]" placeholder="Your email address" required>
+                <button type="submit" class="btn">Subscribe</button>
+              {% endform %}
+            </div>
+
+          {% when 'social' %}
+            <div class="social-media-icons-custom">
+              <h4>{{ block.settings.social_heading }}</h4>
+              <div class="social-icons">
+                {% if block.settings.facebook_url != blank %}
+                  <a target="_blank" href="{{ block.settings.facebook_url }}">
+                    {%- render 'icon-facebook' -%}
+                  </a>
+                {% endif %}
+                {% if block.settings.linkedin_url %}
+                  <a target="_blank" href="{{ block.settings.linkedin_url }}">
+                    {%- render 'icon-linkedin' -%}
+                  </a>
+                {% endif %}
+                {% if block.settings.upwork_url %}
+                  <a target="_blank" href="{{ block.settings.upwork_url }}">{%- render 'icon-upwork' -%}</a>
+                {% endif %}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer New",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Footer Custom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Heading with Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text_heading",
+          "label": "Text Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text_paragraph",
+          "label": "Text Paragraph"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Nav Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "footer_link_list_heading",
+          "label": "Footer Menu Heading"
+        },
+        {
+          "type": "link_list",
+          "id": "footer_link_list",
+          "label": "Footer Menu"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "News Letter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "newsletter_heading",
+          "label": "News Letter Heading"
+        },
+        {
+          "type": "text",
+          "id": "newsletter_text",
+          "label": "News Letter Text"
+        }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "Social Media",
+      "settings": [
+        {
+          "type": "text",
+          "id": "social_heading",
+          "label": "Social Heading"
+        },
+        {
+          "type": "url",
+          "id": "facebook_url",
+          "label": "Facebook URL"
+        },
+        {
+          "type": "url",
+          "id": "linkedin_url",
+          "label": "LinkedIn URL"
+        },
+        {
+          "type": "url",
+          "id": "upwork_url",
+          "label": "Upwork URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

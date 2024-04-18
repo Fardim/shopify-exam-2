@@ -1,0 +1,40 @@
+<div class="header-main-container">
+  <div class="our-container">
+    <div class="our-header-items-column">
+      <div class="our-logo">
+        {% if section.settings.logo %}
+          <a href="/"
+            ><img style="width:{{ section.settings.logo_width }}px" src="{{ section.settings.logo | img_url:'large' }}"
+          ></a>
+        {% else %}
+          <span class="text-logo">Influence</span>
+        {% endif %}
+      </div>
+
+      <div class="our-menu">
+        {% render 'main-menu-snippets' %}
+      </div>
+
+      <div class="header-right">
+        <div class="header-right-items">
+          <div class="our-search-icon">
+            <a href="/search">Search</a>
+          </div>
+          <div class="our-account-icon">
+            {% if customer %}
+              <!-- <a href="/account"> Hi, {{ customer.first_name }}</a> -->
+              <a href="/account/logout">Logout</a>
+            {% else %}
+              <a href="/account/login">{% render 'icon-account' %}</a>
+            {% endif %}
+          </div>
+          <dic class="our-cart-icon">
+            <a href="/cart">
+              {% render 'icon-cart' %}
+            </a>
+          </dic>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

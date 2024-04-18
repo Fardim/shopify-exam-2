@@ -1,0 +1,35 @@
+{% render 'header-main' %}
+
+{% schema %}
+{
+"name":"Header",
+"settings":[
+  {
+    "type":"header",
+    "content":"Header Main"
+  },
+  {
+    "type":"image_picker",
+    "id":"logo",
+    "label":"Upload your Logo"
+  },
+  {
+    "type":"range",
+    "id":"logo_width",
+    "label":"Resize your Logo",
+    "min":60,
+    "max":300,
+    "step":10,
+    "unit":"px",
+    "default":100
+  },
+  {
+    "type":"link_list",
+    "label":"main menu",
+    "id":"main_menu"
+  }
+]
+
+
+}
+{% endschema %}
